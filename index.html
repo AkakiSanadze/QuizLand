@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizeLand - საგანმანათლებლო ქვიზები</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- მთავარი გვერდი -->
+        <section id="home-page" class="page active">
+            <h1>QuizeLand</h1>
+            <p>გაიუმჯობესე ცოდნა სახალისო ქვიზებით!</p>
+            <div class="instructions">
+                <h2>ინსტრუქციები:</h2>
+                <ul>
+                    <li>ქვიზი შედგება 12 შეკითხვისგან.</li>
+                    <li>თითოეულ შეკითხვას აქვს განსაზღვრული დრო.</li>
+                    <li>აირჩიეთ სწორი პასუხი(ები) და გადადით შემდეგ შეკითხვაზე.</li>
+                    <li>ქვიზის დასრულების შემდეგ ნახავთ თქვენს შედეგებს.</li>
+                </ul>
+            </div>
+            <!-- TODO: დაამატე თემატიკის/სირთულის არჩევის ფუნქციონალი -->
+            <button id="start-quiz-btn">ქვიზის დაწყება</button>
+        </section>
+
+        <!-- ქვიზის გვერდი -->
+        <section id="quiz-page" class="page">
+            <div class="quiz-header">
+                <span id="question-counter">შეკითხვა 1/12</span>
+                <span id="timer">დრო: 00:00</span>
+            </div>
+            <div id="question-container">
+                <h2 id="question-text">შეკითხვის ტექსტი აქ...</h2>
+                <div id="options-container">
+                    <!-- პასუხების ვარიანტები დინამიურად დაემატება აქ -->
+                </div>
+                 <div id="text-answer-container" style="display: none;">
+                     <input type="text" id="text-answer" placeholder="შეიყვანეთ პასუხი">
+                 </div>
+            </div>
+            <div class="quiz-navigation">
+                <button id="prev-btn" disabled>წინა</button>
+                <button id="next-btn">შემდეგი</button>
+                <button id="finish-btn" style="display: none;">დასრულება</button>
+            </div>
+        </section>
+
+        <!-- შედეგების გვერდი -->
+        <section id="results-page" class="page">
+            <h2>შედეგები</h2>
+            <p>თქვენი საბოლოო ქულა: <span id="final-score">0</span></p>
+            <p>სწორი პასუხები: <span id="correct-count">0</span></p>
+            <p>არასწორი პასუხები: <span id="incorrect-count">0</span></p>
+            <div id="review-container">
+                <h3>შეკითხვების მიმოხილვა:</h3>
+                <!-- მიმოხილვა დინამიურად დაემატება აქ -->
+            </div>
+            <button id="restart-quiz-btn">ახალი ქვიზის დაწყება</button>
+            <button id="back-to-home-btn">მთავარ გვერდზე დაბრუნება</button>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

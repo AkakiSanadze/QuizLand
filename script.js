@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const reviewContainer = document.getElementById('review-container');
     const restartQuizBtn = document.getElementById('restart-quiz-btn');
     const backToHomeBtn = document.getElementById('back-to-home-btn');
+    const timerEnabledCheckbox = document.getElementById('timer-enabled-checkbox'); // Added timer checkbox
 
     // Quiz Variables
     let allQuestions = []; // To store all questions from JSON
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let score = 0;
     let timer;
     let timeLeft = 0;
+    let isTimerEnabled = false; // Added: Track if timer is active for the quiz
     const TIME_PER_QUESTION = 30; // Seconds per question
     const QUESTIONS_PER_QUIZ = 12;
 
@@ -77,6 +79,10 @@ document.addEventListener('DOMContentLoaded', function() {
         currentQuestionIndex = 0;
         userAnswers = new Array(quizQuestions.length).fill(null); // Reset answers for the selected questions
         score = 0;
+        isTimerEnabled = timerEnabledCheckbox.checked; // Check if timer is enabled
+
+        // Show/hide timer element based on setting
+        timerElement.style.display = isTimerEnabled ? 'inline' : 'none';
 
         homePage.classList.remove('active');
         resultsPage.classList.remove('active');
@@ -94,11 +100,13 @@ document.addEventListener('DOMContentLoaded', function() {
         const question = quizQuestions[currentQuestionIndex];
         console.log("Loading question", currentQuestionIndex, question);
 
-        // Reset timer
-        clearInterval(timer);
-        timeLeft = TIME_PER_QUESTION;
-        updateTimerDisplay();
-        startTimer();
+        // Reset and start timer only if enabled
+        if (isTimerEnabled) {
+            clearInterval(timer);
+            timeLeft = TIME_PER_QUESTION;
+            updateTimerDisplay();
+            startTimer();
+        }
 
         // Display question
         questionText.textContent = question.question;
@@ -189,7 +197,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function finishQuiz() {
-        clearInterval(timer); // Stop timer
+        if (isTimerEnabled) {
+            clearInterval(timer); // Stop timer only if it was enabled
+        }
         saveCurrentAnswer(); // Save the last answer
         calculateScore();
         displayResults();
